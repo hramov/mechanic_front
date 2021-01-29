@@ -7,7 +7,7 @@
           <div class="card-body">
             <div id="content" align="center">
               <ul class="timeline">
-                <li class="event" data-date="580 км, 1 пк">
+                <li class="event" :data-date="station.position">
                   <h3>{{ station.title }}</h3>
                   Обслуживает:
                   <router-link :to="`/workers/${station.worker.id}`">
@@ -21,16 +21,22 @@
                     }}
                   </router-link>
                   <br />
-                  Телефон ОТС:
+                  Телефон ОТС: {{ station.phone.ots }}
                   <br />
-                  Телефон ОбТС:
+                  Телефон ОбТС: {{ station.phone.obts }}
 
                   <hr />
-                  <a href="/property/station/1">Оборудование</a>
+                  <router-link :to="`/property/station/${station.id}`"
+                    >Оборудование</router-link
+                  >
                   <br />
-                  <a href="/work/station/1">Запланированные работы</a>
+                  <router-link :to="`/work/station/${station.id}`"
+                    >Запланированные работы</router-link
+                  >
                   <br />
-                  <a href="/problems/station/1">Проблемные вопросы</a>
+                  <router-link :to="`/problems/station/${station.id}`"
+                    >Проблемные вопросы</router-link
+                  >
                 </li>
               </ul>
             </div>
