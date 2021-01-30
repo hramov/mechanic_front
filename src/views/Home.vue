@@ -1,11 +1,16 @@
 <template>
-  <div class="container">
+  <main>
     <h3>Мой участок</h3>
     <div class="row">
       <div class="col-md-12">
-        <div class="card" v-for="station in distanceGetter" :key="station.id">
+        <div class="card">
           <div class="card-body">
-            <div id="content" align="center">
+            <div
+              id="content"
+              align="center"
+              v-for="station in distanceGetter"
+              :key="station.id"
+            >
               <ul class="timeline">
                 <li class="event" :data-date="station.position">
                   <h3>{{ station.title }}</h3>
@@ -44,7 +49,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">

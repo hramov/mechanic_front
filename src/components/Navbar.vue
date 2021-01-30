@@ -28,20 +28,39 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/property">Имущество</router-link>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <router-link class="nav-link" to="/work">Работы</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/docs">Документация</router-link>
+          </li>-->
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              :to="'/admin'"
+              v-if="
+                Object.values(userGetter).length > 0 &&
+                userGetter.position.id === position.RCSS
+              "
+            >
+              {{
+                nameShortener(
+                  userGetter.lastName,
+                  userGetter.name,
+                  userGetter.otherName
+                )
+              }}
+            </router-link>
           </li>
         </ul>
-        <!-- Button trigger modal -->
+
         <button
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#exampleModal"
           @click="$router.push('/login')"
+          v-if="Object.values(userGetter).length === 0"
         >
           Войти
         </button>
@@ -91,7 +110,24 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { mapGetters } from "vuex";
+import { Position } from "./../utils/enums";
 
-@Options({})
+@Options({
+  data() {
+    return {
+      position: Position,
+    };
+  },
+  computed: {
+    ...mapGetters(["userGetter"]),
+  },
+
+  methods: {
+    nameShortener(lastName: string, name: string, otherName: string) {
+      return `${lastName} ${name.slice(0, 1)}. ${otherName.slice(0, 1)}.`;
+    },
+  },
+})
 export default class Navbar extends Vue {}
 </script>

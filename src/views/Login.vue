@@ -2,7 +2,7 @@
   <main>
     <div class="row">
       <div class="col">
-        <form class="form-signin text-center" width="300px">
+        <form class="form-signin text-center" width="300px" @submit.prevent>
           <h3 class="mb-3 font-weight-normal">Войдите в учетную запись</h3>
           <input
             type="text"
@@ -12,6 +12,7 @@
             required
             autofocus
             style="width: 400px; margin: 0 auto; margin-bottom: 10px"
+            v-model="login"
           />
           <input
             type="password"
@@ -20,8 +21,13 @@
             placeholder="Пароль"
             required
             style="width: 400px; margin: 0 auto; margin-bottom: 10px"
+            v-model="password"
           />
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <button
+            class="btn btn-lg btn-primary btn-block"
+            type="submit"
+            @click="loginMethod"
+          >
             Войти
           </button>
         </form>
@@ -41,7 +47,22 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { mapActions } from "vuex";
 
-@Options({})
+@Options({
+  data() {
+    return {
+      login: "",
+      password: "",
+    };
+  },
+
+  methods: {
+    ...mapActions(["loginAction"]),
+    async loginMethod() {
+      await this.loginAction({ login: this.login, password: this.password });
+    },
+  },
+})
 export default class Home extends Vue {}
 </script>
