@@ -15,33 +15,33 @@
                 <li class="event" :data-date="station.position">
                   <h3>{{ station.title }}</h3>
                   Обслуживает:
-                  <router-link :to="`/workers/${station.worker.id}`">
-                    {{ station.worker.position.title }}
-                    {{
-                      nameGenerator(
-                        station.worker.lastName,
-                        station.worker.name,
-                        station.worker.otherName
-                      )
-                    }}
-                  </router-link>
+                  <!-- <router-link :to="`/workers/${station.worker.id}`"> -->
+                  {{ station.worker.position.title }}
+                  {{
+                    nameGenerator(
+                      station.worker.lastName,
+                      station.worker.name,
+                      station.worker.otherName
+                    )
+                  }}
+                  <!-- </router-link> -->
                   <br />
-                  Телефон ОТС: {{ station.phone.ots }}
+                  Телефон ОТС: {{ station.ots }}
                   <br />
-                  Телефон ОбТС: {{ station.phone.obts }}
+                  Телефон ОбТС: {{ station.obts }}
 
                   <hr />
                   <router-link :to="`/property/station/${station.id}`"
                     >Оборудование</router-link
                   >
                   <br />
-                  <router-link :to="`/work/station/${station.id}`"
+                  <!-- <router-link :to="`/work/station/${station.id}`"
                     >Запланированные работы</router-link
                   >
                   <br />
                   <router-link :to="`/problems/station/${station.id}`"
                     >Проблемные вопросы</router-link
-                  >
+                  > -->
                 </li>
               </ul>
             </div>

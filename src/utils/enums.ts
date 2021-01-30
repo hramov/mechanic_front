@@ -1,6 +1,6 @@
 export enum Position {
-    RCSS = 1,
-    RCSN,
-    RSCM,
-    RCSU
+    RSCN = 1,
+    RCSM = 3,
+    RCSS = 4,
+    RCSU = 5
 }
