@@ -11,6 +11,8 @@ export default createStore({
     employee: [],
     stationProperty: [],
 
+    APIURL: 'http://localhost:3000',
+
     user: JSON.parse(localStorage.getItem('user') || '{}'),
     token: JSON.parse(localStorage.getItem('token') || '{}')
   },
@@ -45,38 +47,38 @@ export default createStore({
   },
   actions: {
     async getProperty({ commit }) {
-      const result = await axios.get('http://localhost:3000/property');
+      const result = await axios.get(`${this.state.APIURL}/property`);
       commit('propertyMutation', result.data);
     },
     async getPropertyForStation({ commit }, id: number) {
-      const result = await axios.get(`http://localhost:3000/property/station/${id}`);
+      const result = await axios.get(`${this.state.APIURL}/property/station/${id}`);
       commit('propertyStationMutation', result.data);
     },
     async getDistance({ commit }) {
-      const result = await axios.get('http://localhost:3000/distance');
+      const result = await axios.get(`${this.state.APIURL}/distance`);
       commit('distanceMutation', result.data);
     },
 
     async getPosition({ commit }) {
-      const result = await axios.get('http://localhost:3000/admin/position')
+      const result = await axios.get(`${this.state.APIURL}/admin/position`)
       commit('positionMutation', result.data)
     },
     async getDepartment({ commit }) {
-      const result = await axios.get('http://localhost:3000/admin/department')
+      const result = await axios.get(`${this.state.APIURL}/admin/department`)
       commit('departmentMutation', result.data)
     },
     async getDevice({ commit }) {
-      const result = await axios.get('http://localhost:3000/admin/device')
+      const result = await axios.get(`${this.state.APIURL}/admin/device`)
       commit('deviceMutation', result.data)
     },
     async getEmployee({ commit }) {
-      const result = await axios.get('http://localhost:3000/admin/employee')
+      const result = await axios.get(`${this.state.APIURL}/admin/employee`)
       console.log(result);
       commit('employeeMutation', result.data)
     },
 
     async loginAction({ commit }, { login, password }) {
-      const result = await axios.post('http://localhost:3000/auth/login', { login: login, password: password });
+      const result = await axios.post(`${this.state.APIURL}/auth/login`, { login: login, password: password });
       let user = {};
       let token = '';
 
@@ -88,10 +90,11 @@ export default createStore({
       commit('userMutation', user);
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', JSON.stringify(token));
+
     },
 
     async saveEmployee(_, employee) {
-      const result = await axios.post('http://localhost:3000/admin/employee', employee);
+      const result = await axios.post(`${this.state.APIURL}/admin/employee`, employee);
       if (result.data) {
         return {
           status: true,
@@ -101,7 +104,7 @@ export default createStore({
     },
 
     async saveProperty(_, property) {
-      const result = await axios.post('http://localhost:3000/admin/property', property);
+      const result = await axios.post(`${this.state.APIURL}/admin/property`, property);
       if (result.data) {
         return {
           status: true,
@@ -110,7 +113,7 @@ export default createStore({
       }
     },
     async saveStation(_, station) {
-      const result = await axios.post('http://localhost:3000/admin/distance', station);
+      const result = await axios.post(`${this.state.APIURL}/admin/distance`, station);
       if (result.data) {
         return {
           status: true,

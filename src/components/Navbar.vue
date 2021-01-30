@@ -40,7 +40,7 @@
               :to="'/admin'"
               v-if="
                 Object.values(userGetter).length > 0 &&
-                userGetter.position.id === position.RCSM
+                userGetter.position.id === 1
               "
             >
               {{

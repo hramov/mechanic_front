@@ -61,6 +61,7 @@ import { mapActions } from "vuex";
     ...mapActions(["loginAction"]),
     async loginMethod() {
       await this.loginAction({ login: this.login, password: this.password });
+      this.$router.push("/admin");
     },
   },
 })
