@@ -8,6 +8,7 @@
         <th scope="col">Станция</th>
         <th scope="col">Местоположение</th>
         <th scope="col">Дата проверки</th>
+        <th scope="col">Перейти</th>
       </tr>
     </thead>
     <tbody>
@@ -30,6 +31,9 @@
             )
           }}
           дня)
+        </td>
+        <td>
+          <router-link :to="`/property/${property.id}`">Клац</router-link>
         </td>
       </tr>
     </tbody>

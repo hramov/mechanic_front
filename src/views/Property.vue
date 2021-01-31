@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h3>Расположение имущества</h3>
+    <h3>Расположение имущества {{ userGetter.department.title }}</h3>
     <div class="card">
       <div class="card-body">
         <PropertyTable :properties="propertyGetter" />
@@ -24,7 +24,7 @@ import PropertyTable from "./../components/PropertyTable.vue";
   components: {
     PropertyTable,
   },
-  computed: mapGetters(["propertyGetter"]),
+  computed: mapGetters(["propertyGetter", "userGetter"]),
   async mounted() {
     await this.getPropertyMethod();
   },

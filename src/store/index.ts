@@ -10,6 +10,7 @@ export default createStore({
     device: [],
     employee: [],
     stationProperty: [],
+    singleProperty: {},
 
     APIURL: 'http://localhost:3000',
 
@@ -43,6 +44,9 @@ export default createStore({
     },
     employeeMutation(state, data) {
       state.employee = data;
+    },
+    SinglePropertyMutation(state, data) {
+      state.singleProperty = data;
     }
   },
   actions: {
@@ -53,6 +57,22 @@ export default createStore({
     async getPropertyForStation({ commit }, id: number) {
       const result = await axios.get(`${this.state.APIURL}/property/station/${id}`);
       commit('propertyStationMutation', result.data);
+    },
+    async getSingleProperty({ commit }, id: number) {
+      const result = await axios.get(`${this.state.APIURL}/property/${id}`);
+      commit('SinglePropertyMutation', result.data);
+    },
+    async updateProperty(_, { singlePropertyGetter, dateCheck }) {
+      const id = singlePropertyGetter.id;
+      // delete singlePropertyGetter.id;
+      singlePropertyGetter.dateCheck = dateCheck;
+      const result = await axios.put(`${this.state.APIURL}/admin/property/${id}`, singlePropertyGetter);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Оборудование успешно обновлено!'
+        }
+      }
     },
     async getDistance({ commit }) {
       const result = await axios.get(`${this.state.APIURL}/distance`);
@@ -132,5 +152,6 @@ export default createStore({
     deviceGetter: state => state.device,
     employeeGetter: state => state.employee,
     stationPropertyGetter: state => state.stationProperty,
+    singlePropertyGetter: state => state.singleProperty
   }
 })
