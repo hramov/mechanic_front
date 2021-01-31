@@ -1,5 +1,5 @@
 <template>
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">Название</th>
@@ -8,7 +8,7 @@
         <th scope="col">Станция</th>
         <th scope="col">Местоположение</th>
         <th scope="col">Дата проверки</th>
-        <th scope="col">Перейти</th>
+        <th scope="col">Действия</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +33,14 @@
           дня)
         </td>
         <td>
-          <router-link :to="`/property/${property.id}`">Клац</router-link>
+          <router-link :to="`/property/${property.id}`"
+            ><font-awesome-icon
+              size="lg"
+              icon="arrow-circle-right"
+              style="margin-right: 10px"
+          /></router-link>
+          <WarningButton />
+          <DangerButton />
         </td>
       </tr>
     </tbody>
@@ -42,9 +49,15 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import WarningButton from "./WarningButton.vue";
+import DangerButton from "./DangerButton.vue";
 
 @Options({
   props: ["properties"],
+  components: {
+    WarningButton,
+    DangerButton,
+  },
 })
 export default class PropertyTable extends Vue {}
 </script>

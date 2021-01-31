@@ -13,7 +13,7 @@
 import { Options, Vue } from "vue-class-component";
 import { mapGetters, mapActions } from "vuex";
 
-import PropertyTable from "./../components/PropertyTable.vue";
+import PropertyTable from "./../components/pieces/PropertyTable.vue";
 
 @Options({
   data: () => {
