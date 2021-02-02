@@ -1,16 +1,16 @@
 <template>
   <div
     class="modal fade"
-    id="stationEditModal"
+    id="propertyEditModal"
     tabindex="-1"
-    aria-labelledby="stationEditModal"
+    aria-labelledby="propertyEditModal"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="stationEditModalLabel">
-            Изменить данные станции Камень-на-Оби
+          <h5 class="modal-title" id="propertyEditModalLabel">
+            Изменить параметры оборудования
           </h5>
           <button
             type="button"
@@ -20,7 +20,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <StationAddTable />
+          <PropertyAddTable />
         </div>
       </div>
     </div>
@@ -30,12 +30,12 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
-import StationAddTable from "./StationAddTable.vue";
+import PropertyAddTable from "./PropertyAddTable.vue";
 
 @Options({
   components: {
-    StationAddTable,
+    PropertyAddTable,
   },
 })
-export default class StationEditModal extends Vue {}
+export default class PropertyEditModal extends Vue {}
 </script>

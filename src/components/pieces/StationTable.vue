@@ -14,7 +14,7 @@
         <td>600 км, 1 пк</td>
         <td>5</td>
         <td>
-          <WarningButton editType="station" />
+          <WarningButton editType="stationEditModal" />
           <DangerButton />
         </td>
       </tr>

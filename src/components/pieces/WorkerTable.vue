@@ -14,7 +14,7 @@
         <td>Храмов С.И.</td>
         <td style="color: green">Работает</td>
         <td>
-          <WarningButton editType="worker" />
+          <WarningButton editType="workerEditModal" />
           <DangerButton />
         </td>
       </tr>

@@ -117,9 +117,10 @@
     </div>
     <br />
     <div align="center">
-      <WarningButton customSize="1x" />
+      <WarningButton customSize="1x" editType="propertyEditModal" />
       <DangerButton customSize="1x" />
     </div>
+    <PropertyEditModal />
   </main>
 </template>
 
@@ -129,11 +130,12 @@ import { mapActions, mapGetters } from "vuex";
 
 import WarningButton from "./../components/pieces/WarningButton.vue";
 import DangerButton from "./../components/pieces/DangerButton.vue";
-
+import PropertyEditModal from "./../components/pieces/PropertyEditModal.vue";
 @Options({
   components: {
     WarningButton,
     DangerButton,
+    PropertyEditModal,
   },
   data() {
     return {

@@ -26,6 +26,7 @@
           <div class="col">
             <h4 class="text-center">Мои Станции</h4>
             <StationTable />
+            <StationEditModal />
           </div>
         </div>
       </div>
@@ -45,6 +46,7 @@ import WorkerTable from "./../components/pieces/WorkerTable.vue";
 import ExpandButtons from "./../components/pieces/ExpandButtons.vue";
 
 import WorkerEditModal from "./../components/pieces/WorkerEditModal.vue";
+import StationEditModal from "./../components/pieces/StationEditModal.vue";
 
 @Options({
   components: {
@@ -55,6 +57,7 @@ import WorkerEditModal from "./../components/pieces/WorkerEditModal.vue";
     WorkerTable,
     ExpandButtons,
     WorkerEditModal,
+    StationEditModal,
   },
 })
 export default class Home extends Vue {}
