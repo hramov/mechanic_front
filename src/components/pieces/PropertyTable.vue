@@ -21,7 +21,7 @@
           <td>{{ property.location }}</td>
           <td>
             {{ new Date(property.dateCheck).toLocaleDateString() }}
-            (осталось
+            (осталось дней:
             {{
               Math.ceil(
                 Math.abs(
@@ -30,8 +30,7 @@
                 ) /
                   (1000 * 3600 * 24)
               )
-            }}
-            дня)
+            }})
           </td>
           <td>
             <router-link :to="`/property/${property.id}`"

@@ -12,7 +12,7 @@
     </h3>
     <div class="card">
       <div class="card-body">
-        <PropertyTable />
+        <PropertyTable :properties="operatedPropertyGetter" />
       </div>
     </div>
   </main>
@@ -31,14 +31,14 @@ import { mapActions, mapGetters } from "vuex";
   components: {
     PropertyTable,
   },
-  computed: mapGetters(["propertyGetter", "userGetter"]),
+  computed: mapGetters(["operatedPropertyGetter", "userGetter"]),
   async mounted() {
     await this.getPropertyMethod();
   },
   methods: {
-    ...mapActions(["getProperty"]),
+    ...mapActions(["getOperatedProperty"]),
     async getPropertyMethod() {
-      await this.getProperty();
+      await this.getOperatedProperty();
     },
   },
 })
