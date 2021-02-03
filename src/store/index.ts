@@ -70,10 +70,8 @@ export default createStore({
       const result = await axios.get(`${this.state.APIURL}/property/operated`);
       commit('OperatedPropertyMutation', result.data);
     },
-    async updateProperty(_, { singlePropertyGetter, dateCheck }) {
-      const id = singlePropertyGetter.id;
-      singlePropertyGetter.dateCheck = dateCheck;
-      const result = await axios.put(`${this.state.APIURL}/admin/property/${id}`, singlePropertyGetter);
+    async updateProperty(_, { property, id }) {
+      const result = await axios.put(`${this.state.APIURL}/admin/property/${id}`, property);
       if (result.data) {
         return {
           status: true,

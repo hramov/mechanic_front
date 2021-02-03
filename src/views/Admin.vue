@@ -6,7 +6,7 @@
         <ExpandButtons />
         <div class="collapse" id="collapseProperty">
           <div class="card-title h5">Добавить имущество</div>
-          <PropertyAddTable />
+          <PropertyAddTable :propertyData="property" />
         </div>
         <div class="collapse" id="collapseWorker">
           <div class="card-title h5">Добавить работника</div>
@@ -49,6 +49,23 @@ import WorkerEditModal from "./../components/pieces/WorkerEditModal.vue";
 import StationEditModal from "./../components/pieces/StationEditModal.vue";
 
 @Options({
+  data() {
+    return {
+      property: {
+        title: "",
+        description: "",
+        invNumber: "",
+        quantity: "",
+        stationId: "",
+        location: "",
+        dateCome: "",
+        dateCheck: "",
+        timeToLive: "",
+        deviceId: "",
+        departmentId: "",
+      },
+    };
+  },
   components: {
     PropertyAddTable,
     WorkerAddTable,

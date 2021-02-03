@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ propertyDataProp }}
     <table class="table table-hover">
       <thead>
         <tr>
@@ -39,13 +40,29 @@
                 icon="arrow-circle-right"
                 style="margin-right: 10px"
             /></router-link>
-            <WarningButton editType="propertyEditModal" />
+            <!-- <button
+              @click="
+                $router.push({
+                  path: `/property/edit/${property.id}`,
+                })
+              "
+            >
+              Edit
+            </button> -->
+
+            <WarningButton
+              @click="$router.push({ path: `/property/edit/${property.id}` })"
+            />
+
             <DangerButton />
           </td>
         </tr>
       </tbody>
     </table>
-    <PropertyEditModal />
+    <!-- <PropertyEditModal
+      :propertyData="propertyDataProp"
+      v-if="propertyDataProp"
+    /> -->
   </div>
 </template>
 
@@ -57,6 +74,11 @@ import PropertyEditModal from "./PropertyEditModal.vue";
 
 @Options({
   props: ["properties"],
+  data() {
+    return {
+      propertyDataProp: undefined,
+    };
+  },
   components: {
     WarningButton,
     DangerButton,

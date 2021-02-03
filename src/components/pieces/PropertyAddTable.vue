@@ -96,7 +96,7 @@
       </option>
     </select>
     <button class="btn btn-primary" @click="savePropertyMethod">
-      Добавить
+      Сохранить
     </button>
   </form>
 </template>
@@ -106,20 +106,22 @@ import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
 
 @Options({
+  props: ["propertyData", "method"],
   data() {
     return {
       property: {
-        title: "",
-        description: "",
-        invNumber: null,
-        quantity: null,
-        stationId: null,
-        location: "",
-        dateCome: "",
-        dateCheck: "",
-        timeToLive: "",
-        deviceId: null,
-        departmentId: null,
+        id: this.propertyData["id"] || "",
+        title: this.propertyData["title"] || "",
+        description: this.propertyData["description"] || "",
+        invNumber: this.propertyData["invNumber"] || "",
+        quantity: this.propertyData["quantity"] || "",
+        stationId: this.propertyData["stationId"] || "",
+        location: this.propertyData["location"] || "",
+        dateCome: this.propertyData["dateCome"] || "",
+        dateCheck: this.propertyData["dateCheck"] || "",
+        timeToLive: this.propertyData["timeToLive"] || "",
+        deviceId: this.propertyData["deviceId"] || "",
+        departmentId: this.propertyData["departmentId"] || "",
       },
     };
   },
@@ -140,6 +142,7 @@ import { mapActions, mapGetters } from "vuex";
       "getDepartment",
       "getDevice",
       "saveProperty",
+      "updateProperty",
       "saveStation",
     ]),
     async savePropertyMethod() {
@@ -152,9 +155,24 @@ import { mapActions, mapGetters } from "vuex";
       this.property.timeToLive = new Date(
         this.property.timeToLive
       ).toLocaleDateString();
-      console.log(await this.saveProperty(this.property));
+
+      if (this.method === "post") await this.saveProperty(this.property);
+      else if (this.method === "put")
+        await this.updateProperty({
+          property: this.property,
+          id: this.property.id,
+        });
+      else console.log("Method is not defined");
+      this.$router.push("/property");
     },
   },
 })
 export default class PropertyAddTable extends Vue {}
 </script>
+
+<style scoped>
+.form-control,
+.form-select {
+  margin-bottom: 10px;
+}
+</style>

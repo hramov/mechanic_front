@@ -20,7 +20,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <PropertyAddTable />
+          <PropertyAddTable :propertyData="propertyData" method="put" />
         </div>
       </div>
     </div>
@@ -29,12 +29,19 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-
+import { mapActions, mapGetters } from "vuex";
 import PropertyAddTable from "./PropertyAddTable.vue";
 
 @Options({
+  props: ["propertyData"],
   components: {
     PropertyAddTable,
+  },
+  methods: {
+    ...mapActions(["getSingleProperty"]),
+  },
+  computed: {
+    ...mapGetters(["singlePropertyGetter"]),
   },
 })
 export default class PropertyEditModal extends Vue {}

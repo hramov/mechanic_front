@@ -18,7 +18,6 @@ import { Options, Vue } from "vue-class-component";
       const isConfirm: boolean = confirm("Вы уверены, что хотите удалить?");
       if (!isConfirm) return;
       console.log("Confirm");
-      //mapAction....delete
     },
   },
 })
