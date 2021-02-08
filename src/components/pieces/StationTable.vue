@@ -9,10 +9,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Камень-на-Оби</td>
-        <td>600 км, 1 пк</td>
-        <td>5</td>
+      <tr v-for="station in distanceGetter" :key="station.id">
+        <td>{{ station.title }}</td>
+        <td>{{ station.position }}</td>
+        <td>{{ station.propertyCount }}</td>
         <td>
           <WarningButton editType="stationEditModal" />
           <DangerButton />
@@ -27,12 +27,19 @@ import { Options, Vue } from "vue-class-component";
 
 import WarningButton from "./WarningButton.vue";
 import DangerButton from "./DangerButton.vue";
+import { mapActions, mapGetters } from "vuex";
 
 @Options({
   components: {
     WarningButton,
     DangerButton,
   },
+
+  methods: mapActions(["getDistance"]),
+  async mounted() {
+    await this.getDistance();
+  },
+  computed: mapGetters(["distanceGetter"]),
 })
 export default class StationTable extends Vue {}
 </script>

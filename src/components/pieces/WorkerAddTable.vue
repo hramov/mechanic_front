@@ -80,17 +80,18 @@ import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
 
 @Options({
+  props: ["workerData"],
   data() {
     return {
       employee: {
-        lastName: "",
-        name: "",
-        otherName: "",
-        departmentId: null,
-        positionId: null,
-        phone: null,
-        login: "",
-        password: "",
+        lastName: this.workerData["lastName"] || "",
+        name: this.workerData["name"] || "",
+        otherName: this.workerData["otherName"] || "",
+        departmentId: this.workerData["departmentId"] || "",
+        positionId: this.workerData["positionId"] || "",
+        phone: this.workerData["phone"] || "",
+        login: this.workerData["login"] || "",
+        password: this.workerData["password"] || "",
       },
     };
   },
@@ -133,3 +134,9 @@ import { mapActions, mapGetters } from "vuex";
 })
 export default class WorkerAddTable extends Vue {}
 </script>
+<style scoped>
+.form-control,
+.form-select {
+  margin-bottom: 10px;
+}
+</style>

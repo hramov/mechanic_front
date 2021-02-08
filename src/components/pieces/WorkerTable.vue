@@ -9,12 +9,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>РЦСН</td>
-        <td>Храмов С.И.</td>
+      <tr v-for="worker in employeesGetter" :key="worker.id">
+        <td>{{ worker.position.title }}</td>
+        <td>
+          {{ worker.lastName }} {{ worker.name.slice(0, 1) }}.
+          {{ worker.otherName.slice(0, 1) }}.
+        </td>
         <td style="color: green">Работает</td>
         <td>
-          <WarningButton editType="workerEditModal" />
+          <WarningButton @click="$router.push(`/worker/edit/${worker.id}`)" />
           <DangerButton />
         </td>
       </tr>
@@ -27,12 +30,18 @@ import { Options, Vue } from "vue-class-component";
 
 import WarningButton from "./WarningButton.vue";
 import DangerButton from "./DangerButton.vue";
+import { mapActions, mapGetters } from "vuex";
 
 @Options({
   components: {
     WarningButton,
     DangerButton,
   },
+  methods: mapActions(["getEmployees"]),
+  async mounted() {
+    await this.getEmployees();
+  },
+  computed: mapGetters(["employeesGetter"]),
 })
 export default class WorkerTable extends Vue {}
 </script>

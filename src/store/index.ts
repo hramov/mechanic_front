@@ -8,10 +8,12 @@ export default createStore({
     position: [],
     department: [],
     device: [],
-    employee: [],
+    employees: [],
     stationProperty: [],
     singleProperty: {},
     operatedProperty: [],
+    singleStation: {},
+    singleWorker: {},
 
     APIURL: 'http://localhost:3000',
 
@@ -47,10 +49,16 @@ export default createStore({
       state.token = data;
     },
     employeeMutation(state, data) {
-      state.employee = data;
+      state.employees = data;
     },
     SinglePropertyMutation(state, data) {
       state.singleProperty = data;
+    },
+    SingleStationMutation(state, data) {
+      state.singleStation = data;
+    },
+    SingleWorkerMutation(state, data) {
+      state.singleWorker = data;
     }
   },
   actions: {
@@ -70,14 +78,13 @@ export default createStore({
       const result = await axios.get(`${this.state.APIURL}/property/operated`);
       commit('OperatedPropertyMutation', result.data);
     },
-    async updateProperty(_, { property, id }) {
-      const result = await axios.put(`${this.state.APIURL}/admin/property/${id}`, property);
-      if (result.data) {
-        return {
-          status: true,
-          message: 'Оборудование успешно обновлено!'
-        }
-      }
+    async getSingleStation({ commit }, id: number) {
+      const result = await axios.get(`${this.state.APIURL}/distance/station/${id}`);
+      commit('SingleStationMutation', result.data);
+    },
+    async getSingleWorker({ commit }, id: number) {
+      const result = await axios.get(`${this.state.APIURL}/admin/employee/${id}`);
+      commit('SingleWorkerMutation', result.data);
     },
     async getDistance({ commit }) {
       const result = await axios.get(`${this.state.APIURL}/distance`);
@@ -96,7 +103,7 @@ export default createStore({
       const result = await axios.get(`${this.state.APIURL}/admin/device`)
       commit('deviceMutation', result.data)
     },
-    async getEmployee({ commit }) {
+    async getEmployees({ commit }) {
       const result = await axios.get(`${this.state.APIURL}/admin/employee`)
       console.log(result);
       commit('employeeMutation', result.data)
@@ -127,6 +134,24 @@ export default createStore({
         }
       }
     },
+    async updateEmployee(_, { employee, id }) {
+      const result = await axios.put(`${this.state.APIURL}/admin/employee/${id}`, employee);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Пользователь успешно обновлен!'
+        }
+      }
+    },
+    async deleteEmployee(_, id) {
+      const result = await axios.delete(`${this.state.APIURL}/admin/employee/${id}`);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Пользователь успешно удален!'
+        }
+      }
+    },
 
     async saveProperty(_, property) {
       const result = await axios.post(`${this.state.APIURL}/admin/property`, property);
@@ -137,12 +162,49 @@ export default createStore({
         }
       }
     },
+    async updateProperty(_, { property, id }) {
+      const result = await axios.put(`${this.state.APIURL}/admin/property/${id}`, property);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Оборудование успешно обновлено!'
+        }
+      }
+    },
+    async deleteProperty(_, id) {
+      const result = await axios.delete(`${this.state.APIURL}/admin/property/${id}`);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Оборудование успешно удалено!'
+        }
+      }
+    },
+
     async saveStation(_, station) {
       const result = await axios.post(`${this.state.APIURL}/admin/distance`, station);
       if (result.data) {
         return {
           status: true,
           message: 'Станция успешно добавлена!'
+        }
+      }
+    },
+    async updateStation(_, { station, id }) {
+      const result = await axios.put(`${this.state.APIURL}/admin/distance/${id}`, station);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Станция успешно обновлена!'
+        }
+      }
+    },
+    async deleteStation(_, id) {
+      const result = await axios.delete(`${this.state.APIURL}/admin/distance/${id}`);
+      if (result.data) {
+        return {
+          status: true,
+          message: 'Станция успешно удалена!'
         }
       }
     }
@@ -155,9 +217,12 @@ export default createStore({
     positionGetter: state => state.position,
     departmentGetter: state => state.department,
     deviceGetter: state => state.device,
-    employeeGetter: state => state.employee,
+    employeesGetter: state => state.employees,
     stationPropertyGetter: state => state.stationProperty,
     singlePropertyGetter: state => state.singleProperty,
     operatedPropertyGetter: state => state.operatedProperty,
+
+    singleStationGetter: state => state.singleStation,
+    singleWorkerGetter: state => state.singleWorker,
   }
 })
