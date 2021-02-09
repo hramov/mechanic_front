@@ -1,7 +1,7 @@
 <template>
   <main>
     <h3>
-      Расположение имущества {{ userGetter.department.title }} /
+      Расположение оборудования {{ userGetter.department.title }} /
       <router-link to="/property/operated"> Необходимо проверить</router-link>
     </h3>
     <div class="card">

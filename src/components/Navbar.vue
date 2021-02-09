@@ -26,7 +26,9 @@
           </li> -->
 
           <li class="nav-item">
-            <router-link class="nav-link" to="/property">Имущество</router-link>
+            <router-link class="nav-link" to="/property"
+              >Оборудование</router-link
+            >
           </li>
           <!--<li class="nav-item">
             <router-link class="nav-link" to="/work">Работы</router-link>

@@ -99,21 +99,21 @@ import { mapActions, mapGetters } from "vuex";
     await this.getDistance();
     await this.getPosition();
     await this.getDepartment();
-    await this.getEmployee();
+    await this.getEmployees();
   },
   computed: mapGetters([
     "distanceGetter",
     "positionGetter",
     "departmentGetter",
     "userGetter",
-    "employeeGetter",
+    "employeesGetter",
   ]),
   methods: {
     ...mapActions([
       "getDistance",
       "getPosition",
       "getDepartment",
-      "getEmployee",
+      "getEmployees",
       "saveEmployee",
     ]),
     nameGenerator(

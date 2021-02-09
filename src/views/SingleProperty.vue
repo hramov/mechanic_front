@@ -120,7 +120,6 @@
       <WarningButton customSize="1x" editType="propertyEditModal" />
       <DangerButton customSize="1x" />
     </div>
-    <PropertyEditModal />
   </main>
 </template>
 

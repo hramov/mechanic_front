@@ -10,23 +10,21 @@
         </div>
         <div class="collapse" id="collapseWorker">
           <div class="card-title h5">Добавить работника</div>
-          <WorkerAddTable />
+          <WorkerAddTable :workerData="employee" />
         </div>
         <div class="collapse" id="collapseStation">
           <div class="card-title h5">Добавить станцию</div>
-          <StationAddTable />
+          <StationAddTable :stationData="station" />
         </div>
         <hr />
         <div class="row">
-          <div class="col">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <h4 class="text-center">Мои работники</h4>
             <WorkerTable />
-            <WorkerEditModal />
           </div>
-          <div class="col">
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <h4 class="text-center">Мои Станции</h4>
             <StationTable />
-            <StationEditModal />
           </div>
         </div>
       </div>
@@ -63,6 +61,24 @@ import StationEditModal from "./../components/pieces/StationEditModal.vue";
         timeToLive: "",
         deviceId: "",
         departmentId: "",
+      },
+      employee: {
+        lastName: "",
+        name: "",
+        otherName: "",
+        departmentId: "",
+        positionId: "",
+        phone: "",
+        login: "",
+        password: "",
+      },
+      station: {
+        title: "",
+        position: "",
+        departmentId: 0,
+        workerId: 0,
+        ots: "",
+        obts: "",
       },
     };
   },

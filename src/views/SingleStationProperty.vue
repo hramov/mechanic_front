@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h3>Расположение имущества на станции {{ getStation() }}</h3>
+    <h3>Расположение имущества на станции {{ singleStationGetter.title }}</h3>
     <div class="card">
       <div class="card-body">
         <PropertyTable :properties="stationPropertyGetter" />
@@ -21,12 +21,13 @@ import PropertyTable from "./../components/pieces/PropertyTable.vue";
   components: {
     PropertyTable,
   },
-  computed: mapGetters(["stationPropertyGetter"]),
+  computed: mapGetters(["stationPropertyGetter", "singleStationGetter"]),
   async mounted() {
+    await this.getSingleStation(this.$route.params.id);
     await this.getPropertyForStation(this.$route.params.id);
   },
   methods: {
-    ...mapActions(["getPropertyForStation"]),
+    ...mapActions(["getPropertyForStation", "getSingleStation"]),
     getStation() {
       let station = "";
       let prevStation = "";

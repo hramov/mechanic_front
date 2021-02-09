@@ -47,7 +47,7 @@
       required
     >
       <option
-        v-for="employee in employeeGetter"
+        v-for="employee in employeesGetter"
         :key="employee.id"
         :value="employee.id"
       >
@@ -70,34 +70,35 @@ import { Options, Vue } from "vue-class-component";
 import { mapActions, mapGetters } from "vuex";
 
 @Options({
+  props: ["stationData"],
   data() {
     return {
       station: {
-        title: "",
-        position: "",
-        departmentId: 0,
-        workerId: 0,
-        ots: "",
-        obts: "",
+        title: this.stationData["title"] || "",
+        position: this.stationData["position"] || "",
+        departmentId: this.stationData["departmentId"] || 0,
+        workerId: this.stationData["workerId"] || 0,
+        ots: this.stationData["ots"] || "",
+        obts: this.stationData["obts"] || "",
       },
     };
   },
   async mounted() {
     await this.getDistance();
     await this.getDepartment();
-    await this.getEmployee();
+    await this.getEmployees();
   },
   computed: mapGetters([
     "distanceGetter",
     "departmentGetter",
     "userGetter",
-    "employeeGetter",
+    "employeesGetter",
   ]),
   methods: {
     ...mapActions([
       "getDistance",
       "getDepartment",
-      "getEmployee",
+      "getEmployees",
       "saveStation",
     ]),
     nameGenerator(

@@ -40,15 +40,6 @@
                 icon="arrow-circle-right"
                 style="margin-right: 10px"
             /></router-link>
-            <!-- <button
-              @click="
-                $router.push({
-                  path: `/property/edit/${property.id}`,
-                })
-              "
-            >
-              Edit
-            </button> -->
 
             <WarningButton
               @click="$router.push({ path: `/property/edit/${property.id}` })"
@@ -78,6 +69,9 @@ import PropertyEditModal from "./PropertyEditModal.vue";
     return {
       propertyDataProp: undefined,
     };
+  },
+  mounted() {
+    console.log(this.properties);
   },
   components: {
     WarningButton,

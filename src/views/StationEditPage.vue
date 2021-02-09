@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h3>Изменить данные оборудования {{ singleStationGetter.title }}</h3>
+    <h3>Изменить данные станции {{ singleStationGetter.title }}</h3>
     <StationAddTable
       :stationData="singleStationGetter"
       method="put"
