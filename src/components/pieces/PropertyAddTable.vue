@@ -110,7 +110,7 @@ import { mapActions, mapGetters } from "vuex";
   data() {
     return {
       property: {
-        id: this.propertyData["id"] || "",
+        // id: this.propertyData["id"] || "",
         title: this.propertyData["title"] || "",
         description: this.propertyData["description"] || "",
         invNumber: this.propertyData["invNumber"] || "",
@@ -156,13 +156,16 @@ import { mapActions, mapGetters } from "vuex";
         this.property.timeToLive
       ).toLocaleDateString();
 
-      if (this.method === "post") await this.saveProperty(this.property);
-      else if (this.method === "put")
-        await this.updateProperty({
-          property: this.property,
-          id: this.property.id,
-        });
-      else console.log("Method is not defined");
+      const result = await this.saveProperty(this.property);
+      alert(result.message);
+
+      // else if (this.method === "put")
+      //   await this.updateProperty({
+      //     property: this.property,
+      //     id: this.property.id,
+      //   });
+      // else console.log("Method is not defined");
+
       this.$router.push("/property");
     },
   },
