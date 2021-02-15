@@ -110,7 +110,6 @@ import { mapActions, mapGetters } from "vuex";
   data() {
     return {
       property: {
-        // id: this.propertyData["id"] || "",
         title: this.propertyData["title"] || "",
         description: this.propertyData["description"] || "",
         invNumber: this.propertyData["invNumber"] || "",
@@ -145,26 +144,22 @@ import { mapActions, mapGetters } from "vuex";
       "updateProperty",
       "saveStation",
     ]),
+
+    dateFormatted(date: string): string {
+      const dateArray = date.split(".");
+      const middleString: string = dateArray[0];
+      dateArray[0] = dateArray[1];
+      dateArray[1] = middleString;
+      return new Date(dateArray.join(".")).toLocaleDateString();
+    },
+
     async savePropertyMethod() {
-      this.property.dateCome = new Date(
-        this.property.dateCome
-      ).toLocaleDateString();
-      this.property.dateCheck = new Date(
-        this.property.dateCheck
-      ).toLocaleDateString();
-      this.property.timeToLive = new Date(
-        this.property.timeToLive
-      ).toLocaleDateString();
+      this.property.dateCome = this.dateFormatted(this.property.dateCome);
+      this.property.dateCheck = this.dateFormatted(this.property.dateCheck);
+      this.property.timeToLive = this.dateFormatted(this.property.timeToLive);
 
       const result = await this.saveProperty(this.property);
       alert(result.message);
-
-      // else if (this.method === "put")
-      //   await this.updateProperty({
-      //     property: this.property,
-      //     id: this.property.id,
-      //   });
-      // else console.log("Method is not defined");
 
       this.$router.push("/property");
     },

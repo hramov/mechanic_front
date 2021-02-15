@@ -21,17 +21,9 @@
           <td>{{ property.station.title }}</td>
           <td>{{ property.location }}</td>
           <td>
-            {{ new Date(property.dateCheck).toLocaleDateString() }}
+            {{ new Date(property.dateCheck).toLocaleDateString("en-GB") }}
             (осталось дней:
-            {{
-              Math.ceil(
-                Math.abs(
-                  new Date(property.dateCheck).getTime() -
-                    new Date(Date.now()).getTime()
-                ) /
-                  (1000 * 3600 * 24)
-              )
-            }})
+            {{ daysToCheck(property.dateCheck) }})
           </td>
           <td>
             <router-link :to="`/property/${property.id}`"
@@ -77,6 +69,26 @@ import PropertyEditModal from "./PropertyEditModal.vue";
     WarningButton,
     DangerButton,
     PropertyEditModal,
+  },
+  methods: {
+    dateFormatted(date: string): string {
+      const dateArray = date.split(".");
+      const middleString: string = dateArray[0];
+      dateArray[0] = dateArray[1];
+      dateArray[1] = middleString;
+      return new Date(dateArray.join(".")).toLocaleDateString();
+    },
+
+    daysToCheck(dateCheck: string): number {
+      const result = Math.ceil(
+        Math.abs(
+          new Date(dateCheck).getTime() - new Date(Date.now()).getTime()
+        ) /
+          (1000 * 3600 * 24) -
+          1
+      );
+      return result;
+    },
   },
 })
 export default class PropertyTable extends Vue {}

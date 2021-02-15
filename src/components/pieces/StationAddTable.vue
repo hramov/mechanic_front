@@ -113,7 +113,14 @@ import { mapActions, mapGetters } from "vuex";
       )}.`;
     },
     async saveStationMethod() {
-      console.log(await this.saveStation(this.station));
+      const result = await this.saveStation(this.station);
+      alert(result.message);
+
+      this.station = {};
+
+      await this.getDistance();
+      await this.getDepartment();
+      await this.getEmployees();
     },
   },
 })
